@@ -15,6 +15,7 @@ const App = () => (
   <Provider store={store}>
     <Router history={history}>
 	    <div className="app-wrap">
+	     	<Route exact path='/' component={LoginIn}></Route>  
 	        <Route exact path='/web-loginIn' component={LoginIn}></Route>  
 	        <Route path='/web-admin' component={Admin}></Route>  
 	    </div>

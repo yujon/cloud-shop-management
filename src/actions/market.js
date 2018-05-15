@@ -117,7 +117,8 @@ export function updateHotCaseListFail(){
 	}
 }
 
-export function getSpecialActivityList(pid){
+
+export function getSpecialActivityList(){
 	return {
 		type:marketConf.GET_SPECIAL_ACTIVITY_LIST_REQUEST,
 		payload:{
@@ -145,31 +146,94 @@ export function getSpecialActivityListFail(){
 	}
 }
 
-export function updateSpecialActivityList(hotCaseList){
+export function updateSpecialActivityListItem(specialActivityListItemId,specialActivityListItem,callback){
 	return {
-		type:marketConf.UPDATE_SPECIAL_ACTIVITY_LIST_REQUEST,
-		hotCaseList,
+		type:marketConf.UPDATE_SPECIAL_ACTIVITY_LIST_ITEM_REQUEST,
+		callback,
+		specialActivityListItemId,
+		specialActivityListItem,
 		payload:{
-			updateSpecialActivityListStatus:'doing'
+			updateSpecialActivityListItemStatus:'doing'
 		}
 	}
 }
 
-export function updateSpecialActivityListSuccess(specialActivityList){
+export function updateSpecialActivityListItemSuccess(specialActivityList){
 	return {
-		type:marketConf.UPDATE_SPECIAL_ACTIVITY_LIST_SUCCESS,
+		type:marketConf.UPDATE_SPECIAL_ACTIVITY_LIST_ITEM_SUCCESS,
 		payload:{
-			updateSpecialActivityListStatus:'success',
-			specialActivityList:specialActivityList
+			updateSpecialActivityListItemStatus:'success',
+			specialActivityList
 		}
 	}
 }
 
-export function updateSpecialActivityListFail(){
+export function updateSpecialActivityListItemFail(){
 	return {
-		type:marketConf.UPDATE_SPECIAL_ACTIVITY_LIST_FAIL,
+		type:marketConf.UPDATE_SPECIAL_ACTIVITY_LIST_ITEM_FAIL,
 		payload:{
-			updateSpecialActivityListStatus:'fail'
+			updateSpecialActivityListItemStatus:'fail'
+		}
+	}
+}
+
+export function addSpecialActivityListItem(specialActivityListItem,callback){
+	return {
+		type:marketConf.ADD_SPECIAL_ACTIVITY_LIST_ITEM_REQUEST,
+		callback,
+		specialActivityListItem,
+		payload:{
+			addSpecialActivityListItemStatus:'doing'
+		}
+	}
+}
+
+export function addSpecialActivityListItemSuccess(specialActivityList){
+	return {
+		type:marketConf.ADD_SPECIAL_ACTIVITY_LIST_ITEM_SUCCESS,
+		payload:{
+			addSpecialActivityListItemStatus:'success',
+			specialActivityList
+		}
+	}
+}
+
+export function addSpecialActivityListItemFail(){
+	return {
+		type:marketConf.ADD_SPECIAL_ACTIVITY_LIST_ITEM_FAIL,
+		payload:{
+			addSpecialActivityListItemStatus:'fail'
+		}
+	}
+}
+
+
+export function removeSpecialActivityListItem(specialActivityListItemId,callback){
+	return {
+		type:marketConf.REMOVE_SPECIAL_ACTIVITY_LIST_ITEM_REQUEST,
+		callback,
+		specialActivityListItemId,
+		payload:{
+			removeSpecialActivityListItemStatus:'doing'
+		}
+	}
+}
+
+export function removeSpecialActivityListItemSuccess(specialActivityList){
+	return {
+		type:marketConf.REMOVE_SPECIAL_ACTIVITY_LIST_ITEM_SUCCESS,
+		payload:{
+			removeSpecialActivityListItemStatus:'success',
+			specialActivityList
+		}
+	}
+}
+
+export function removeSpecialActivityListItemFail(){
+	return {
+		type:marketConf.REMOVE_SPECIAL_ACTIVITY_LIST_ITEM_FAIL,
+		payload:{
+			removeSpecialActivityListItemStatus:'fail'
 		}
 	}
 }

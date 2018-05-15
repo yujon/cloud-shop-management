@@ -86,7 +86,6 @@ class AdminMarketSwiper extends React.Component {
             {swiperImgList.map((item,index) => (
               <div key={index} style={{width:400, height:200}}>
                 <img
-                  
                   src={SERVER+item}
                   alt=""
                   style={{ display: 'inline-block',width:400, height:200 }}

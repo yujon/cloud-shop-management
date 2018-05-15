@@ -10,6 +10,7 @@ import AdminIndex from './admin/AdminIndex';
 import AdminSetting from './admin/AdminSetting';
 import AdminMarketSwiper from './admin/AdminMarketSwiper';
 import AdminMarketHotCase from './admin/AdminMarketHotCase';
+import AdminMarketSpecialActivity from './admin/AdminMarketSpecialActivity';
 
 const {SubMenu} = Menu;
 const {Header, Content, Sider, } = Layout;
@@ -35,12 +36,8 @@ const siderMenus = {
      {
       name:'货源市场',
       icon:'schedule'
-    }, 
+    },
     {
-      name:'买家市场',
-      icon:'schedule'
-    }
-    , {
       name:'数据分析',
       icon:'calculator'
     }
@@ -108,28 +105,6 @@ const siderMenus = {
       {
         name:'分类管理',
         url:'/web-admin/market/category',
-        role:1
-      }
-    ],
-    [
-      {
-        name:'首页轮播图',
-        url:'/web-admin//hall/swiper',
-        role:1
-      },
-      {
-        name:'爆款',
-        url:'/web-admin/hall/hotCase',
-        role:1
-      },
-       {
-        name:'活动',
-        url:'/web-admin/hall/specialActivity',
-        role:1
-      },
-      {
-        name:'分类管理',
-        url:'/web-admin/hall/category',
         role:1
       }
     ],
@@ -279,11 +254,12 @@ class Admin extends Component {
                           <Breadcrumb.Item>{this.state.selectedParentItemName}</Breadcrumb.Item>
                           <Breadcrumb.Item>{this.state.selectedItemName}</Breadcrumb.Item>
                         </Breadcrumb>
-                        <Content style={{ background: '#fff', padding: 24, margin: 0, minHeight: 280 }}>
+                        <Content style={{ background: '#fff', padding: 24, margin: 0}}>
                           <Route exact path='/web-admin/index' component={AdminIndex}></Route>  
                           <Route exact path='/web-admin/setting' component={AdminSetting}></Route>  
                           <Route exact path='/web-admin/market/swiper' component={AdminMarketSwiper}></Route>  
                           <Route exact path='/web-admin/market/hotCase' component={AdminMarketHotCase}></Route> 
+                          <Route exact path='/web-admin/market/specialActivity' component={AdminMarketSpecialActivity}></Route> 
                         </Content>
                       </Layout>
                     </Layout>

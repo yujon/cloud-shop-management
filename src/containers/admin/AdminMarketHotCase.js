@@ -37,18 +37,18 @@ class AdminMarketHotCase extends React.Component {
   }
 
   render() {
-    const {hotCaseList,commodityList} = this.props;
-    const {getHotCaseListStatus,updateHotCaseListStatus} = this.props;
+    const {tempHotCaseList} = this.state;
+    const {hotCaseList,commodityList,getHotCaseListStatus,updateHotCaseListStatus} = this.props;
     let defaultValue = [];
     hotCaseList.forEach((hotCaseItem)=>{
-      defaultValue.push(`${hotCaseItem.shopId._id}|${hotCaseItem.commodityId._id}`)
+      defaultValue.push(`${hotCaseItem.shopId}|${hotCaseItem.commodityId}`)
     })
     return (
-        <div style={styles.container}>
-         <div style={styles.opDiv}>
+      <div style={styles.container}>
+        <div style={styles.addDiv}>
             <div style={styles.line}>
                <Select  mode="multiple" size="default" placeholder="Please select"  style={{ width: '100%' }}
-                defaultValue={defaultValue} onChange={(list)=>{this.setState({tempHotCaseList:list})}}>
+               value={tempHotCaseList.length?tempHotCaseList:defaultValue} onChange={(list)=>{this.setState({tempHotCaseList:list})}}>
                 {
                     commodityList.map((commodity)=>{
                       return(
@@ -59,7 +59,7 @@ class AdminMarketHotCase extends React.Component {
               </Select>
             </div>
             <div style={styles.line}>
-              <Button type="primary" onClick={()=>{this.updateHotCaseList()}}>保存修改</Button>
+              <Button type="primary" onClick={()=>{this.updateHotCaseList()}}>添加保存</Button>
             </div>
           </div>
 
@@ -76,7 +76,7 @@ const styles= {
     height:'100%',
     position:'relative'
   },
-  opDiv:{
+  addDiv:{
     width:400,
     height:300,
     position:'absolute',

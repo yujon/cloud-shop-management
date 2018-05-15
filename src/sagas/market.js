@@ -3,7 +3,7 @@ import * as Request from '../utils/Request';
 
 import {GET_SWIPER_IMAGE_LIST_REQUEST,UPDATE_SWIPER_IMAGE_LIST_REQUEST,
   GET_HOTCASE_LIST_REQUEST,UPDATE_HOTCASE_LIST_REQUEST,
-  GET_SPECIAL_ACTIVITY_LIST_REQUEST,UPDATE_SPECIAL_ACTIVITY_LIST_REQUEST} from '../constants/market';
+  GET_SPECIAL_ACTIVITY_LIST_REQUEST,UPDATE_SPECIAL_ACTIVITY_LIST_ITEM_REQUEST,ADD_SPECIAL_ACTIVITY_LIST_ITEM_REQUEST,REMOVE_SPECIAL_ACTIVITY_LIST_ITEM_REQUEST} from '../constants/market';
 import * as MarketActionCreators from '../actions/market';
 
 
@@ -49,7 +49,6 @@ export function* updateHotCaseList({hotCaseList}){
   }
 }
 
-
 export function* getSpecialActivityList({}){
   try {
     const {data} = yield call(Request.request, '/market/getSpecialActivityList',"get",{});
@@ -59,15 +58,43 @@ export function* getSpecialActivityList({}){
   }
 }
 
-export function* updateSpecialActivityList({specialActivityList}){
+export function* updateSpecialActivityListItem({specialActivityListItemId,specialActivityListItem,callback}){
   try {
     const jsonStr = JSON.stringify({
-      specialActivityList
+      specialActivityListItemId,
+      specialActivityListItem
     });
-    const {data} = yield call(Request.request, '/market/updateSpecialActivityList',"post",{'Content-Type': 'application/json;charset=utf-8'},jsonStr);
-    yield put(MarketActionCreators.updateSpecialActivityListSuccess(data.specialActivityList));
+    const {data} = yield call(Request.request, '/market/updateSpecialActivityListItem',"post",{'Content-Type': 'application/json;charset=utf-8'},jsonStr);
+    yield put(MarketActionCreators.updateSpecialActivityListItemSuccess(data.specialActivityList));
+    callback && callback();
   } catch (error) {
-    yield put(MarketActionCreators.updateSpecialActivityListFail());
+    yield put(MarketActionCreators.updateSpecialActivityListItemFail());
+  }
+}
+
+export function* addSpecialActivityListItem({specialActivityListItem,callback}){
+  try {
+     const jsonStr = JSON.stringify({
+      specialActivityListItem
+    });
+    const {data} = yield call(Request.request, '/market/addSpecialActivityListItem',"post",{'Content-Type': 'application/json;charset=utf-8'},jsonStr);
+    yield put(MarketActionCreators.addSpecialActivityListItemSuccess(data.specialActivityList));
+    callback && callback();
+  } catch (error) {
+    yield put(MarketActionCreators.addSpecialActivityListItemFail());
+  }
+}
+
+export function* removeSpecialActivityListItem({specialActivityListItemId,callback}){
+  try {
+     const jsonStr = JSON.stringify({
+      specialActivityListItemId
+    });
+    const {data} = yield call(Request.request, '/market/removeSpecialActivityListItem',"post",{'Content-Type': 'application/json;charset=utf-8'},jsonStr);
+    yield put(MarketActionCreators.removeSpecialActivityListItemSuccess(data.specialActivityList));
+    callback && callback()
+  } catch (error) {
+    yield put(MarketActionCreators.removeSpecialActivityListItemFail());
   }
 }
 
@@ -77,5 +104,7 @@ export function* watchMarketRequest(getState) {
   yield takeLatest(GET_HOTCASE_LIST_REQUEST, getHotCaseList);
   yield takeLatest(UPDATE_HOTCASE_LIST_REQUEST, updateHotCaseList);
   yield takeLatest(GET_SPECIAL_ACTIVITY_LIST_REQUEST, getSpecialActivityList);
-  yield takeLatest(UPDATE_SPECIAL_ACTIVITY_LIST_REQUEST, updateSpecialActivityList);
+  yield takeLatest(UPDATE_SPECIAL_ACTIVITY_LIST_ITEM_REQUEST, updateSpecialActivityListItem);
+  yield takeLatest(ADD_SPECIAL_ACTIVITY_LIST_ITEM_REQUEST, addSpecialActivityListItem);
+  yield takeLatest(REMOVE_SPECIAL_ACTIVITY_LIST_ITEM_REQUEST, removeSpecialActivityListItem);
 }
